@@ -12,10 +12,7 @@ type Props = {
 /** A page template with global navbar */
 const WithNavbarTemplate = React.memo(function WithNavbarTemplate({
   children,
-  navbarTitle,
-  link,
 }: Props) {
-  console.log("123123");
   return (
     <>
       <NavbarDropdown />

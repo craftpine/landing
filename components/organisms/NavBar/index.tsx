@@ -65,7 +65,7 @@ const Navbar = () => {
 
                 <Disclosure.Panel className="flex flex-wrap w-full my-5 lg:hidden">
                   <>
-                    {width && width < 768 && (
+                    {width && width < 1024 && (
                       <Menu mobile navigation={navigation} />
                     )}
 
@@ -77,7 +77,7 @@ const Navbar = () => {
           )}
         </Disclosure>
 
-        {width && width >= 768 && <Menu navigation={navigation} />}
+        {width && width >= 1024 && <Menu navigation={navigation} />}
 
         <div className="hidden mr-3 space-x-4 lg:flex nav__item">
           <Button>Get Started</Button>

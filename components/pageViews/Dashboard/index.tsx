@@ -5,7 +5,7 @@ import LandingSection from "@/components/atoms/LandingSection";
 import Features from "@/components/molecules/Features";
 import React from "react";
 import Brand from "@/components/molecules/Brand";
-import Intro from "@/components/molecules/Intro";
+import Intro from "@/components/organisms/Intro";
 
 const LandingPageView = () => {
   return (

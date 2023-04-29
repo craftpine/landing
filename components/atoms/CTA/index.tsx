@@ -10,6 +10,7 @@ const CTA = () => {
         Pull content from anywhere and serve it fast with Astro's next-gen
         island architecture.
       </p>
+      {/* TODO: Button */}
       <div className="mt-5 px-8 py-4 text-lg font-medium text-center text-indigo-600 bg-white rounded-md ">
         Get Started
       </div>

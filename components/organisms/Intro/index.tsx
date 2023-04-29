@@ -4,10 +4,11 @@ import heroImg from "../../../public/img/hero.png";
 
 import ModalRoot from "@/components/_gadgets/ModalRoot";
 import LOGO from "../../atoms/Logo";
+import Button from "@/components/atoms/Button";
+import RegisterModalContent from "../../molecules/RegisterModalContent";
 
 const Intro = () => {
   const handleRegister = () => {
-    console.log("asdfasdf");
     setShow(true);
   };
 
@@ -19,9 +20,14 @@ const Intro = () => {
 
   return (
     <>
-      <ModalRoot show={show} onClose={handleClose}>
-        asdfasdf
+      <ModalRoot
+        show={show}
+        onClose={handleClose}
+        title="Create your free account"
+      >
+        <RegisterModalContent />
       </ModalRoot>
+
       <div className="flex flex-wrap ">
         <div className="flex items-center w-full lg:w-1/2">
           <div className="max-w-2xl mb-8">
@@ -35,12 +41,9 @@ const Intro = () => {
             </p>
 
             <div className="flex flex-col items-start space-y-3 sm:space-x-4 sm:space-y-0 sm:items-center sm:flex-row">
-              <button
-                onClick={handleRegister}
-                className="px-8 py-4 text-lg font-medium text-center text-white bg-indigo-600 rounded-md "
-              >
+              <Button className="px-8 py-4 text-lg" onClick={handleRegister}>
                 Get Started
-              </button>
+              </Button>
 
               <a
                 href="https://github.com/web3templates/nextly-template/"
