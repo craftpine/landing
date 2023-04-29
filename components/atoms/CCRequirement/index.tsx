@@ -4,7 +4,7 @@ import React from "react";
 export default function CCRequirement() {
   return (
     <div>
-      <h2 className="font-stock mb-2 uppercase ">
+      <h2 className="font-stock mb-2 uppercase  ">
         Why is my credit card required
       </h2>
       <p className="text-sm mt-2  leading-relaxed text-gray-500 dark:text-gray-400">

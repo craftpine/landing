@@ -2,74 +2,12 @@ import Button from "@/components/atoms/Button";
 import Input from "@/components/atoms/Input";
 import axios from "axios";
 import { useRouter } from "next/router";
-
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import { toast } from "react-toastify";
 import { ShieldCheckIcon } from "@heroicons/react/24/solid";
 import AccessList from "@/components/atoms/AccessList";
 import CCRequirement from "@/components/atoms/CCRequirement";
-
-function capitalizeText(text: string): string {
-  return text.charAt(0).toUpperCase() + text.substring(1);
-}
-
-function validateExpiryDate(expiryDate: string): string {
-  const regex = /^(0[1-9]|1[0-2])\/\d{2}$/;
-  if (!regex.test(expiryDate)) {
-    return "Invalid expiration date (MM/YY)";
-  }
-
-  const parts = expiryDate.split("/");
-  const month = parseInt(parts[0]);
-  const year = parseInt("20" + parts[1]);
-
-  const expiryDateObj = new Date(year, month, 0);
-  const today = new Date();
-
-  if (expiryDateObj < today) {
-    return "Card has been expired";
-  }
-
-  return "";
-}
-
-function validateCvc(cvc: string): string {
-  if (!/^\d+$/.test(cvc)) {
-    return "The CVC code consists of digits only.";
-  }
-
-  if (cvc.length !== 3 && cvc.length !== 4) {
-    return "The CVC code must be 3 or 4 digits.";
-  }
-
-  return "";
-}
-
-function validateCardNumber(cardNumber: string) {
-  const cleanedCardNumber = cardNumber.replace(/[\s-]/g, "");
-
-  if (!/^\d{13,19}$/.test(cleanedCardNumber)) {
-    return "Invalid card number";
-  }
-
-  let sum = 0;
-  for (let i = cleanedCardNumber.length - 1; i >= 0; i--) {
-    let digit = parseInt(cleanedCardNumber.charAt(i));
-    if (i % 2 === 1) {
-      digit *= 2;
-      if (digit > 9) {
-        digit -= 9;
-      }
-    }
-    sum += digit;
-  }
-
-  if (sum % 10 !== 0) {
-    return "Invalid card number";
-  }
-
-  return "";
-}
+import { validateCardNumber, validateCvc, validateExpiryDate } from "@/utils";
 
 export default function RegisterForm() {
   const router = useRouter();
@@ -79,6 +17,7 @@ export default function RegisterForm() {
     name: "",
     expiryDate: "",
     cvc: "",
+    email: "",
   });
 
   const [errForm, setErrForm] = useState({
@@ -87,8 +26,6 @@ export default function RegisterForm() {
     expiryDateErr: "Expiry date is not empty!",
     cvcErr: "CVC is not empty!",
   });
-
-  const { email } = router.query;
 
   const validForm = Object.values(errForm).every((t) => t === "");
 
@@ -99,7 +36,6 @@ export default function RegisterForm() {
       try {
         const res = await axios.post("/api/hello", {
           ...form,
-          email,
         });
         if (res.data.status) {
           toast("Registration successful!");
@@ -143,6 +79,13 @@ export default function RegisterForm() {
     setForm((state) => ({ ...state, [name]: value }));
   };
 
+  React.useEffect(() => {
+    const { email } = router.query;
+    if (email) {
+      setForm((state) => ({ ...state, email: email as string }));
+    }
+  }, [router.query]);
+
   return (
     <form
       className="flex md:flex-row flex-col gap-6 md:p-4 "
@@ -157,7 +100,7 @@ export default function RegisterForm() {
         <div className="p-6">
           <Input
             label="Email address"
-            value={email}
+            value={form.email}
             type="email"
             required
             disabled
@@ -223,7 +166,7 @@ export default function RegisterForm() {
         </div>{" "}
       </div>
 
-      <div className="w-full mb-4 md:w-1/2 shadow-2xl p-6 rounded-lg bg-gray-100">
+      <div className="w-full mb-4 md:w-1/2 shadow-2xl p-6 rounded-lg bg-gray-100 dark:bg-transparent">
         <h3 className="font-bold mb-3">
           Your member ship will give you access to:
         </h3>

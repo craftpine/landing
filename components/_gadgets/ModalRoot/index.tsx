@@ -30,7 +30,6 @@ function ModalRoot(props: Props) {
       className="fixed w-100 h-full top-0 left-0 right-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50 dark:bg-opacity-80  w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 max-h-full"
     >
       <div className="relative w-full max-w-2xl max-h-full" ref={modalRef}>
-        \
         <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
           {/* Modal header */}
           <div className="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">

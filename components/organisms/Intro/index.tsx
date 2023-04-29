@@ -46,7 +46,7 @@ const Intro = () => {
               </Button>
 
               <a
-                href="https://github.com/web3templates/nextly-template/"
+                href="https://github.com/craftpine/landing"
                 target="_blank"
                 rel="noopener"
                 className="flex items-center space-x-2 text-gray-500 dark:text-gray-400"
